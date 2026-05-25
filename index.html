@@ -534,7 +534,7 @@ refreshScale();
 
     <div>
       <b>Line</b><br>
-      <button onclick="changeCyl(-0.25)">Darken</button>
+      <button onclick="changeCyl(-0.25)">Lighter</button>
       <button style="height:30px" onclick="rotateFan(-90)">Flip</button><br>
 
     </div>
@@ -557,7 +557,7 @@ refreshScale();
 
 <div>
      <b>Line</b><br>
-      <button onclick="changeCyl(0.25)">Lighten</button>
+      <button onclick="changeCyl(0.25)">Darker</button>
       <button style="height:30px" onclick="rotateFan(90)">Flip</button><br>
 
     </div>
@@ -853,7 +853,7 @@ const ctx = canvas.getContext('2d');
 /* ===== State ===== */
 let cylBlur = 0.00;
 let fogOn = false;
-let fogStrength = 0.75;
+let fogStrength = 0.25;
 let angle = 0;
 let deviceMode = 'ipad'; // default
 
@@ -981,7 +981,7 @@ const cy = ch / 2;
   }
 
   fanAngles.forEach(a => {
-	const rel = diff180(a, angle + 90);
+    const rel = diff180(a, angle);
     const effectiveRel = Math.min(rel, 90);
     const basePower = deviceMode === 'ipad' ? 1 : 1;   // shape at low cyl
     const cylInfluence = 0.35;       // how much cyl affects curve
@@ -992,8 +992,8 @@ const dynamicPower = basePower - (cylBlur * cylInfluence);
 const t = effectiveRel / 90;
 
 const rawBlur = Math.min(
-  Math.pow(t, Math.max(0.2, dynamicPower)) * (cylBlur * 1.25)
-  + (fogOn ? fogStrength : 0),
+  Math.pow(t, Math.max(0.2, dynamicPower)) * (cylBlur * 2.5)
+  + (fogOn ? fogStrength : 0.75),
   maxBlur
 );
 
