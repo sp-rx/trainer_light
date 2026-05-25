@@ -981,7 +981,7 @@ const cy = ch / 2;
   }
 
   fanAngles.forEach(a => {
-    const rel = diff180(a, angle);
+    const rel = diff180(a, angle + 90 );
     const effectiveRel = Math.min(rel, 90);
     const basePower = deviceMode === 'ipad' ? 1 : 1;   // shape at low cyl
     const cylInfluence = 0.35;       // how much cyl affects curve
